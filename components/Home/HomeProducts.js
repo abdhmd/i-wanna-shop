@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {  Section } from "../../components/Tools";
+import { Section } from "../../components/Tools";
 
 import HomeProductsItems from "./HomeProductsItems";
 import HomeProductsSearch from "./HomeProductsSearch";
@@ -9,6 +9,8 @@ import { CgMenuBoxed } from "react-icons/cg";
 import { BiCategory } from "react-icons/bi";
 
 const HomeProducts = ({ products, categories }) => {
+
+  
   const [categoriesToggle, setCategoriesToggle] = useState(false);
   const [productsDetails, setProductsDetails] = useState([]);
   const [showCategories, setShowCategories] = useState(false);
@@ -36,7 +38,6 @@ const HomeProducts = ({ products, categories }) => {
             }}
             className="border flex justify-center items-center px-2 capitalize border-black rounded h-full cursor-pointer font-medium py-2 text-sm"
           >
-            {" "}
             <span className="pr-2">
               <CgMenuBoxed />
             </span>
@@ -59,8 +60,7 @@ const HomeProducts = ({ products, categories }) => {
         <HomeProductsSearch products={products} />
       </div>
 
-        {/* Categorirs ====================================================== */}
-
+      {/* Categorirs ====================================================== */}
 
       <div
         className={`fixed z-40 top-0 left-0 bg-white  w-full md:w-1/2 lg:w-1/3 md:border-r h-screen flex  flex-col justify-start duration-300 overflow-hidden px-4 ${
@@ -93,8 +93,7 @@ const HomeProducts = ({ products, categories }) => {
         </ul>
       </div>
 
-        {/* Products Items ====================================================== */}
-
+      {/* Products Items ====================================================== */}
 
       <HomeProductsItems
         productsDetails={productsDetails}

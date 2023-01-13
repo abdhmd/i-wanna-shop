@@ -1,17 +1,25 @@
 import Link from "next/link";
 import { icons, menu, socialMedia } from "../Tools";
 import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
-
+import { useRouter } from "next/router";
 import { useState } from "react";
 import CartProducts from "./CartProducts";
+import { useStateContext } from "../../context/State";
 
 const Navbar = () => {
+
+  // Context add Qty =====================
+  const { qty } = useStateContext();
+
+  // Show Cart ======================
   const [menuToggle, setMenuToggle] = useState(false);
   const [cartToggle, setCartToggle] = useState(false);
-  const [active, setActive] = useState("text-gray-300");
-  const activeClass = (title) => {
-    return title && setActive("text-black");
-  };
+
+// Set Link Active =================
+  const active = "text-black";
+  const router = useRouter();
+  const currentRoute = router.pathname;
+
   return (
     <nav className="mb-6 md:mb-8 lg:mb-10">
       <Link
@@ -32,12 +40,15 @@ const Navbar = () => {
                 icon.name === "cart" && setCartToggle(!cartToggle);
               }}
             >
-              <span
-                className="  cursor-pointer relative"
-                
-              >
+              <span className="  cursor-pointer relative">
                 {icon.icon}
-                <span className={`${icon.name === "menu" && "hidden"} absolute bg-black  text-white text-[10px] font-bold flex justify-center items-center rounded-full w-5 h-5 -top-3 -right-2 `}>1</span>
+                <span
+                  className={`${
+                    (icon.name === "menu" || qty === 0) && "hidden"
+                  } absolute bg-black  text-white text-[10px] font-bold flex justify-center items-center rounded-full w-5 h-5 -top-3 -right-2 `}
+                >
+                  {qty}
+                </span>
               </span>
             </li>
           );
@@ -46,7 +57,7 @@ const Navbar = () => {
 
       {/* Menu ======================================*/}
       <div
-        className={ `z-50 bg-white fixed w-full h-full left-0 top-0 overflow-hidden pl-6 md:pl-8 lg:pl-10 flex flex-col  justify-between   duration-300 ${
+        className={`z-50 bg-white fixed w-full h-full left-0 top-0 overflow-hidden pl-6 md:pl-8 lg:pl-10 flex flex-col  justify-between   duration-300 ${
           !menuToggle && " w-0 -left-[200%]"
         }`}
       >
@@ -64,13 +75,17 @@ const Navbar = () => {
               return (
                 <li
                   key={item.title}
-                  className={`text-3xl md:text-4xl  font-semibold uppercase ${active}`}
+                  className="text-3xl md:text-4xl  font-semibold uppercase text-zinc-600 hover:text-black "
                   onClick={() => {
                     setMenuToggle(!menuToggle);
-                    activeClass(item.title);
                   }}
                 >
-                  <Link href={item.link}>{item.title}</Link>
+                  <Link
+                    href={item.link}
+                    className={currentRoute === item.link ? active : undefined}
+                  >
+                    {item.title}
+                  </Link>
                 </li>
               );
             })}

@@ -1,9 +1,10 @@
 import { Hero, HomeProducts } from "../components/Home";
-const Home = ({ products ,categories}) => {
+const Home = ({ products, categories }) => {
+  
   return (
     <section>
       <Hero products={products} />
-      <HomeProducts  products={products} categories={categories}/>
+      <HomeProducts products={products} categories={categories} />
     </section>
   );
 };
