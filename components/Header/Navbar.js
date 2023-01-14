@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { icons, menu, socialMedia } from "../Tools";
+import { Button, icons, menu, socialMedia } from "../Tools";
 import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -7,15 +7,14 @@ import CartProducts from "./CartProducts";
 import { useStateContext } from "../../context/State";
 
 const Navbar = () => {
-
-  // Context add Qty =====================
-  const { qty } = useStateContext();
+  // Context add Qty and Prices  =====================
+  const { qty, prices } = useStateContext();
 
   // Show Cart ======================
   const [menuToggle, setMenuToggle] = useState(false);
   const [cartToggle, setCartToggle] = useState(false);
 
-// Set Link Active =================
+  // Set Link Active =================
   const active = "text-black";
   const router = useRouter();
   const currentRoute = router.pathname;
@@ -112,7 +111,7 @@ const Navbar = () => {
           !cartToggle && "w-0  -right-[200%]"
         }`}
       >
-        <div className="flex justify-between items-center  mt-6 md:mt-8 lg:mt-10 w-full ">
+        <div className="flex justify-between items-center  mt-6 md:mt-8 lg:mt-10 w-full py-4 ">
           <div>
             <h3 className="capitalize font-medium text-xl">cart porducts</h3>
           </div>
@@ -127,7 +126,25 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-        <div className="h-full  w-full ">
+        {/* Chekout and Total ==================== */}
+        <div
+          className={`${
+            qty === 0 && "hidden "
+          }    pb-2  w-full  rounded  flex flex-col   gap-2 items-center justify-between`}
+        >
+          <div className="grid grid-cols-2 gap-2  w-full">
+            <div className="border border-black rounded p-2 text-sm">
+              Quantites :<span className="font-semibold pl-2">{qty}</span>
+            </div>
+            <div className="  border border-black rounded p-2 text-sm">
+              Prices :<span className="font-semibold pl-2">${prices}</span>
+            </div>
+          </div>
+          <Button styles="bg-black text-white !w-full ">
+            <Link href="/">Checkout</Link>
+          </Button>
+        </div>
+        <div className={`h-full  w-full ${qty != 0 && "overflow-y-scroll"}`}>
           <CartProducts />
         </div>
       </div>

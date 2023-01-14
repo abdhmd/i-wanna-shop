@@ -10,6 +10,14 @@ export const StateContext = ({ children }) => {
       ? cartItems.reduce((sum, product) => sum + product.quantite, 0)
       : 0;
 
+  const prices =
+    cartItems != undefined
+      ? cartItems.reduce(
+          (sum, product) => sum + product.price * product.quantite,
+          0
+        )
+      : 0;
+
   const addOn = (product) => {
     const productId = product.id;
     const checkProduct = cartItems.find((item) => item.id === productId);
@@ -58,6 +66,7 @@ export const StateContext = ({ children }) => {
         deleteOn,
         removeOn,
         qty,
+        prices
       }}
     >
       {children}

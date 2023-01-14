@@ -7,17 +7,15 @@ import { useState } from "react";
 const CartProducts = () => {
   const { cartItems, deleteOn, removeOn, addOn } = useStateContext();
 
-  
-
   return (
     <>
       <div
         className={` ${
           cartItems.length >= 1 && "hidden"
-        } flex flex-col items-center justify-center w-full h-full`}
+        } flex flex-col items-center justify-center w-full h-full `}
       >
         {cartItems.length < 1 && (
-          <div className="flex flex-col items-center justify-center gap-6">
+          <div className="flex flex-col items-center justify-center gap-6 ">
             <span className="uppercase font-medium  text-2xl text-zinc-700">
               your cart is empty
             </span>
@@ -25,7 +23,12 @@ const CartProducts = () => {
         )}
       </div>
       <div className="flex flex-col gap-2 py-4 ">
-        {cartItems.length >= 1 &&
+
+       
+
+        {/* Cart Items =============== */}
+        <div className="  w-full h-full flex flex-col gap-2    ">
+          {cartItems.length >= 1 &&
             cartItems.map((item, i) => {
               return (
                 <div
@@ -77,6 +80,7 @@ const CartProducts = () => {
                 </div>
               );
             })}
+        </div>
       </div>
     </>
   );

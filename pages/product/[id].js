@@ -2,19 +2,14 @@ import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { Button } from "../../components/Tools";
 import { useState, useContext } from "react";
 import { useStateContext } from "../../context/State";
-import { CartContext } from "../../context/CartContext";
 import Link from "next/link";
 
 const product = ({ product, products }) => {
+  // Use Context ================== /
   const { addOn } = useStateContext();
   const handleBuyNow = () => {
     addOn(product);
   };
-
-  // Use Context ================== /
-  const cart = useContext(CartContext);
-  const productQuantity = cart.getProductQuantity(product.id);
-
   // Get Categories ================== /
   const category = product.category;
   const categories = products.filter((p) => p.category === category);
@@ -38,7 +33,7 @@ const product = ({ product, products }) => {
           <img
             src={src}
             alt={product.title}
-            className="rounded w-full h-52 object-contain duration-100"
+            className="rounded border shadow-sm w-full h-52 object-contain duration-100"
           />
           <div className="md:col-span-2 ">
             <div className="flex  items-center gap-2">
@@ -63,19 +58,22 @@ const product = ({ product, products }) => {
                   <span className="font-bold text-lg"> ${product.price}</span>
                 </div>
               </div>
-              <Button styles="bg-black text-white">
-                <span
-                  onClick={() => {
-                    handleBuyNow();
-                    // cart.addOneToCart( product.id);
-                    // console.log(productQuantity, product.id);
-
-                    // console.log(cart.items ,product.id);
-                  }}
-                >
-                  add to cart
-                </span>
-              </Button>
+              <div className="flex  gap-2 ">
+                <Button >
+                  <span
+                    onClick={() => {
+                      handleBuyNow();
+                    }}
+                  >
+                    add to cart
+                  </span>
+                </Button>
+                <Button styles="bg-black text-white">
+                  <Link href="/">
+                    buy now 
+                  </Link>
+                </Button>
+              </div>
             </div>
           </div>
         </div>
