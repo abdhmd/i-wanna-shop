@@ -141,7 +141,9 @@ const Navbar = () => {
             </div>
           </div>
           <Button styles="bg-black text-white !w-full ">
-            <Link href="/">Checkout</Link>
+            <Link onClick={() => setCartToggle(!cartToggle)} href="/checkout">
+              Checkout
+            </Link>
           </Button>
         </div>
         <div className={`h-full  w-full ${qty != 0 && "overflow-y-scroll"}`}>

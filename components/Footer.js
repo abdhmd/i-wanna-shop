@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Section, socialMedia } from "./Tools";
 
+
 const Footer = () => {
   return (
     <Section>

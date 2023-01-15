@@ -1,8 +1,6 @@
-import Link from "next/link";
-import { FaStar, FaStarHalfAlt, FaMinus, FaPlus } from "react-icons/fa";
+import {  FaMinus, FaPlus } from "react-icons/fa";
 import { Button } from "../Tools";
 import { useStateContext } from "../../context/State";
-import { useState } from "react";
 
 const CartProducts = () => {
   const { cartItems, deleteOn, removeOn, addOn } = useStateContext();
@@ -81,6 +79,8 @@ const CartProducts = () => {
               );
             })}
         </div>
+
+        
       </div>
     </>
   );

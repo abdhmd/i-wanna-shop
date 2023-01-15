@@ -1,6 +1,6 @@
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { Button } from "../../components/Tools";
-import { useState, useContext } from "react";
+import { useState } from "react";
 import { useStateContext } from "../../context/State";
 import Link from "next/link";
 
@@ -58,8 +58,7 @@ const product = ({ product, products }) => {
                   <span className="font-bold text-lg"> ${product.price}</span>
                 </div>
               </div>
-              <div className="flex  gap-2 ">
-                <Button >
+                <Button styles="bg-black text-white" >
                   <span
                     onClick={() => {
                       handleBuyNow();
@@ -68,12 +67,8 @@ const product = ({ product, products }) => {
                     add to cart
                   </span>
                 </Button>
-                <Button styles="bg-black text-white">
-                  <Link href="/">
-                    buy now 
-                  </Link>
-                </Button>
-              </div>
+               
+              
             </div>
           </div>
         </div>
